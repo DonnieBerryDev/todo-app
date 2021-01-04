@@ -1,0 +1,133 @@
+// EM Function
+$browser-context: 16; // Default
+
+@function em($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}em;
+}
+
+// Rem Function
+$baseFontSize: 16;
+
+@function rem($pixels, $context: $baseFontSize) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return $pixels / $context * 1rem;
+}
+
+// Transparent
+@mixin background-opacity($color, $opacity: 0.3) {
+  background: $color;
+  /* The Fallback */
+  background: rgba($color, $opacity);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #4158d0;
+  background-image: linear-gradient(
+    43deg,
+    #4158d0 0%,
+    #c850c0 46%,
+    #ffcc70 100%
+  );
+}
+
+body {
+}
+
+#todoForm {
+  height: 100%;
+}
+
+button {
+  outline: 0;
+  border: 0;
+  color: white;
+  padding: rem(5) rem(10);
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.btn_complete {
+  background: green;
+}
+
+.btn_delete {
+  margin-left: rem(15);
+  background: red;
+}
+
+div.todo {
+  padding: rem(10);
+  &:nth-child(even) {
+    background: #eee;
+  }
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+  li {
+    display: flex;
+    .todo_todos {
+      padding-right: rem(5);
+      width: 100%;
+    }
+    .todo_buttons {
+      align-content: flex-end;
+      display: flex;
+    }
+  }
+}
+
+.todo_form {
+  padding: rem(20) rem(30);
+  background: #fff;
+  width: rem(600);
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 9px 24px;
+  border-radius: 20px;
+  .todo_input {
+    input {
+      width: 100%;
+      padding: rem(5);
+      background: 0;
+      border: 0;
+      border-bottom: 1px solid black;
+      transition: 0.2s all ease;
+      &:focus {
+        outline: 0;
+        border-bottom: 3px solid black;
+        transition: 0.2s all ease;
+      }
+    }
+  }
+}
+
+.container {
+  height: 100%;
+  padding: 0 rem(50);
+  max-width: rem(900);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#root {
+  height: 100%;
+  .App {
+    height: 100%;
+  }
+}
